@@ -53,7 +53,7 @@ function validated(element) {
     readonlyInput.innerHTML = text; // replacing innerHTML of readonly div with textTag value
 }
 
-button.addEventListener("click", () => {
+function performAction() {
     console.log("clicked");
     // Reload the page after updating the view
     location.reload();
@@ -84,10 +84,19 @@ button.addEventListener("click", () => {
             // Update the view with the received tweets
             const tweetsContainer = document.querySelector("#tweets-container");
             const tweetView = `
-            @include('components.tweet.twdisplay', ['tweets' => ${JSON.stringify(
-                tweets
-            )}, 'user' => ${JSON.stringify(user)}])
-        `;
+        @include('components.tweet.twdisplay', ['tweets' => ${JSON.stringify(
+            tweets
+        )}, 'user' => ${JSON.stringify(user)}])
+      `;
             // Update the view here...
         });
+}
+
+button.addEventListener("click", performAction);
+
+editableInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Prevent form submission if the input is inside a form
+        performAction();
+    }
 });
