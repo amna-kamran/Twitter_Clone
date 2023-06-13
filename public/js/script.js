@@ -55,6 +55,8 @@ function validated(element) {
 
 button.addEventListener("click", () => {
     console.log("clicked");
+    // Reload the page after updating the view
+    location.reload();
     const tweetContent = editableInput.innerText; // Obtain the tweet content from the editable input
 
     fetch("/tweets", {
@@ -86,9 +88,6 @@ button.addEventListener("click", () => {
                 tweets
             )}, 'user' => ${JSON.stringify(user)}])
         `;
-            tweetsContainer.innerHTML = tweetView;
-        })
-        .catch((error) => {
-            console.error("Error:", error);
+            // Update the view here...
         });
 });

@@ -17,8 +17,8 @@ public function store(Request $request)
 
     // Save the tweet in the database
     $tweet = Tweet::create([
+        'u_id' => $user->id,
         'content' => $content,
-        'user_id' => $user->id,
         'created_at' => Carbon::now(),
     ]);
     // Handle the formatted time as needed (e.g., store it in the database or perform any other actions)
@@ -30,44 +30,44 @@ public function store(Request $request)
 }
 
 
-public function show()
-{
-    $user = auth()->user();
+// public function show()
+// {
+//     $user = auth()->user();
 
-    // Retrieve all the tweets, ordered by the most recent
-    $tweets = Tweet::latest()->get();
+//     // Retrieve all the tweets, ordered by the most recent
+//     $tweets = Tweet::latest()->get();
 
-    // Format the time for each tweet
-    $currentTime = now();
-    foreach ($tweets as $tweet) {
-        $tweetTime = $tweet->created_at;
-        $timeDiff = $currentTime->diffInMinutes($tweetTime);
+//     // Format the time for each tweet
+//     $currentTime = now();
+//     foreach ($tweets as $tweet) {
+//         $tweetTime = $tweet->created_at;
+//         $timeDiff = $currentTime->diffInMinutes($tweetTime);
 
-        if ($timeDiff < 60) {
-            $tweet->formattedTime = $timeDiff . 'm';
-        } elseif ($timeDiff < 1440) {
-            $tweet->formattedTime = floor($timeDiff / 60) . 'h';
-        } else {
-            $tweet->formattedTime = floor($timeDiff / 1440) . 'd';
-        }
-    }
+//         if ($timeDiff < 60) {
+//             $tweet->formattedTime = $timeDiff . 'm';
+//         } elseif ($timeDiff < 1440) {
+//             $tweet->formattedTime = floor($timeDiff / 60) . 'h';
+//         } else {
+//             $tweet->formattedTime = floor($timeDiff / 1440) . 'd';
+//         }
+//     }
 
-    if ($tweets->isEmpty()) {
-        // Handle the case where no tweets are available
-        $errorMessage = "No tweets found.";
-        return response()->json(['errorMessage' => $errorMessage]);
-    }
+//     if ($tweets->isEmpty()) {
+//         // Handle the case where no tweets are available
+//         $errorMessage = "No tweets found.";
+//         return response()->json(['errorMessage' => $errorMessage]);
+//     }
 
     // Return the tweets as a JSON response
-    return response()->json(['tweets' => $tweets, 'user' => $user]);
-}
+//     return response()->json(['tweets' => $tweets, 'user' => $user]);
+// }
 
 
 function displayDashboard(){
     $user = auth()->user();
 
-    // Retrieve all the tweets, ordered by the most recent
-    $tweets = Tweet::latest()->get();
+    // Retrieve the tweets with matching user_id
+    $tweets = Tweet::where('u_id', $user->id)->latest()->get();
 
     // Format the time for each tweet
     $currentTime = now();
@@ -84,11 +84,7 @@ function displayDashboard(){
         }
     }
 
-    if ($tweets->isEmpty()) {
-        // Handle the case where no tweets are available
-        $errorMessage = "No tweets found.";
-        return view('components.tweet.twdisplay', ['errorMessage' => $errorMessage]);
-    }
+ 
      return view('dashboard', ['tweets' => $tweets, 'user' => $user]);
 }
 function deleteTweet(){
