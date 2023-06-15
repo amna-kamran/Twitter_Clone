@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{ asset('css/search.css') }}">
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,6 +22,23 @@
                         {{ __('Message') }}
                     </x-nav-link>
                 </div>
+                <div id="wrap">
+  <!-- <form id="nav-search" class="form-search" action="/search" role="search">
+    <input id="search-query" class="search-input" type="text" placeholder="Search" />
+    <button class="icon" type="submit"></button>
+  </form>
+  <!-- Search results container -->
+<!-- <div id="searchResultsContainer"></div> -->
+<div id="searchContainer">
+    <!-- Search bar -->
+    <input type="text" id="searchBar" placeholder="Search for users">
+
+    <!-- Search results container -->
+    <ul id="searchResultsContainer">sd</ul>
+</div>
+
+
+</div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -103,3 +121,4 @@
         </div>
     </div>
 </nav>
+ <script src="{{asset('js/search.js')}}"></script>

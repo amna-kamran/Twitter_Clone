@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -48,4 +48,18 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
+    public function searchUsers(Request $request)
+    {
+        try {
+            $searchQuery = $request->input('searchQuery');
+            $users = User::where('name', 'LIKE', '%' . $searchQuery . '%')->get();
+            return response()->json(['users' => $users]);
+        } catch (\Exception $e) {
+            // Handle the exception and return a JSON error response
+            return response()->json(['error' => 'An error occurred during the search.'], 500);
+        }
+    }
+
+
+
 }

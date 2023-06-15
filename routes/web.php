@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TweetController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,6 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 Route::post('/tweets', [TweetController::class, 'store'])->name('tweets.store');
-Route::get('/show', [TweetController::class, 'show'])->name('tweets.show')->middleware('auth');
+// Route::get('/show', [TweetController::class, 'show'])->name('tweets.show')->middleware('auth');
 Route::delete('/tweets/{id}', [TweetController::class, 'deleteTweet'])->name('tweets.destroy');
+Route::post('/search', [RegisteredUserController::class, 'searchUsers'])->name('users.search');
