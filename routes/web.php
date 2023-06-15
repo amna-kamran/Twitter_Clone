@@ -27,9 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 Route::post('/tweets', [TweetController::class, 'store'])->name('tweets.store');
 Route::get('/show', [TweetController::class, 'show'])->name('tweets.show')->middleware('auth');
 Route::delete('/tweets/{id}', [TweetController::class, 'deleteTweet'])->name('tweets.destroy');
-
-

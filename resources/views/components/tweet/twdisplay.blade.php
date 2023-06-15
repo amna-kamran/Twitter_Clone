@@ -33,11 +33,7 @@
                         <li class="timeline-Tweet-action"><a class="Icon Icon--share" href="#"></a></li>
                     </ul>
                      <li class="timeline-Tweet-action">
-                            <form action="{{ route('tweets.destroy', $tweet->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="delete-tweet-button">...</button>
-                            </form>
+                                <button type="submit" class="delete-tweet-button" data-tweet-id="{{ $tweet->id }}">...</button>
                         </li>
                 </div>
             </div>
@@ -47,5 +43,6 @@
 <!-- partial -->
 
 <!-- Add your JavaScript code and other content -->
+ <script src="{{asset('js/delete.js')}}"></script>
 </body>
 </html>

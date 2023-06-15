@@ -53,7 +53,7 @@ function validated(element) {
     readonlyInput.innerHTML = text; // replacing innerHTML of readonly div with textTag value
 }
 
-function performAction() {
+function tweetReq() {
     console.log("clicked");
     // Reload the page after updating the view
     location.reload();
@@ -92,11 +92,11 @@ function performAction() {
         });
 }
 
-button.addEventListener("click", performAction);
+button.addEventListener("click", tweetReq);
 
 editableInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
         event.preventDefault(); // Prevent form submission if the input is inside a form
-        performAction();
+        tweetReq();
     }
 });
