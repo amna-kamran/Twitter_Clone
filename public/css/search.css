@@ -1,33 +1,30 @@
-#wrap {
-    text-align: center;
-}
-#nav-search {
-    margin: 0 auto;
-    position: relative;
-    width: 202px;
-}
-
 #nav-search input {
     font-family: "Helvetica Neue", Arial, sans-serif;
     font-size: 13px;
     line-height: 20px;
     display: block;
-    width: 163px;
-    height: 14px;
+    width: 400px;
+    height: 30px;
     padding: 6px 27px 6px 12px;
+    margin-top: 17px;
     cursor: pointer;
     color: rgb(102, 102, 102);
-    background-color: rgb(204, 204, 204);
+    background-color: rgb(239, 243, 244);
     border: none;
-    border-radius: 13px 13px 13px 13px;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2) inset;
+    border-radius: 20px 20px 20px 20px;
+    transition: background-color 0.3s, color 0.3s; /* Add transition property */
+}
+
+#nav-search input:focus {
+    background-color: white; /* Change background color on focus */
+    color: black; /* Change text color on focus */
 }
 
 #nav-search .icon {
     position: absolute;
     display: block;
-    top: 4px;
-    right: 4px;
+    top: 7px;
+    right: 8px;
     width: 14px;
     height: 15px;
     background: url("https://abs.twimg.com/a/1374049044/t1/img/twitter_web_sprite_icons.png") -20px -710px
@@ -36,4 +33,37 @@
     text-indent: -200px;
     padding: 0;
     cursor: pointer;
+}
+
+.search-results {
+    list-style-type: none;
+    padding: 0;
+}
+
+.search-result {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+.search-results {
+    margin-top: 10px;
+}
+.search-results li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #ffffff; /* Add background color */
+    padding: 10px;
+    padding-left: 20px;
+}
+
+.search-results .name {
+    font-weight: bold;
+    padding: 5px; /* Adjust padding as needed */
+    font-size: 16px;
+}
+
+.search-results .username {
+    color: #797979;
+    font-size: 16px;
 }

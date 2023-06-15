@@ -22,24 +22,23 @@
                         {{ __('Message') }}
                     </x-nav-link>
                 </div>
-                <div id="wrap">
-  <!-- <form id="nav-search" class="form-search" action="/search" role="search">
-    <input id="search-query" class="search-input" type="text" placeholder="Search" />
-    <button class="icon" type="submit"></button>
-  </form>
-  <!-- Search results container -->
-<!-- <div id="searchResultsContainer"></div> -->
-<div id="searchContainer">
-    <!-- Search bar -->
-    <input type="text" id="searchBar" placeholder="Search for users">
-
-    <!-- Search results container -->
-    <ul id="searchResultsContainer">sd</ul>
-</div>
-
-
-</div>
             </div>
+            <div id="searchContainer">
+    <!-- Search bar -->
+<!-- Search bar -->
+<div  d="wrap">
+  <form id="nav-search" class="form-search" action="/search" role="search">
+    <input id="searchBar" class="search-input" type="text" placeholder="Search" />
+     <utton class="icon" ype="submit"></button>
+  </form>
+</div>
+ <div>
+<!-- Search results container -->
+<ul id="searchResultsContainer" class="search-results">
+</ul>
+</div>
+</div>
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">

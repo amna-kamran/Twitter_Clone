@@ -29,8 +29,19 @@ function searchUsers(searchQuery) {
                 // Iterate over the search results and create list items
                 data.users.forEach((user) => {
                     const listItem = document.createElement("li");
-                    listItem.textContent = user.name;
                     listItem.classList.add("search-result");
+
+                    // Create the name element
+                    const name = document.createElement("span");
+                    name.textContent = user.name;
+                    name.classList.add("name");
+                    listItem.appendChild(name);
+
+                    // Create the username element
+                    const username = document.createElement("span");
+                    username.textContent = "@" + user.name;
+                    username.classList.add("username");
+                    listItem.appendChild(username);
 
                     // Add click event listener to each list item
                     listItem.addEventListener("click", function () {
