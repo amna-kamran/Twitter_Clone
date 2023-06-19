@@ -2,14 +2,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <title>Twitter Profile</title>
 </head>
 <body>
 
 
   <div class="banner">
-    <h1>Twitter do Gabriel de Jesus</h1>
+    <strong class="txt">{{ $user->name }}</strong>
   </div>
 
   <div class="bar">
