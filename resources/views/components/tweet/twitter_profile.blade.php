@@ -40,8 +40,8 @@
   <div class="wrapper-content">
     <div class="container">
       <aside class="profile">
-        <h1>Amna Kamran</h1>
-        <span>@amnakamran</span>
+        <h1>{{ $user->name }}</h1>
+        <span>@ {{ $user->name }}</span>
   
         <ul class="list">
           <li>Islamabad, Pakistan</li>

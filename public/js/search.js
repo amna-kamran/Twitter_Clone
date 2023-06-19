@@ -45,8 +45,7 @@ function searchUsers(searchQuery) {
 
                     // Add click event listener to each list item
                     listItem.addEventListener("click", function () {
-                        // Call a function to display the user's profile and tweets
-                        console.log(user.id);
+                        window.location.href = `/search/profile/${user.id}`;
                     });
 
                     // Append the list item to the result list

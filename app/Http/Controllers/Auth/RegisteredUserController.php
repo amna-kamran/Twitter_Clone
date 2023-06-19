@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\Tweet;
 
 class RegisteredUserController extends Controller
 {
@@ -59,6 +60,35 @@ class RegisteredUserController extends Controller
             return response()->json(['error' => 'An error occurred during the search.'], 500);
         }
     }
+
+public function displayUsers($userId)
+{
+    // Retrieve user information
+    $user = User::findOrFail($userId);
+
+    // Retrieve tweets for the user
+    $tweets = Tweet::where('u_id', $userId)->latest()->get();
+
+    // Format the time for each tweet
+    $currentTime = now();
+    foreach ($tweets as $tweet) {
+        $tweetTime = $tweet->created_at;
+        $timeDiff = $currentTime->diffInMinutes($tweetTime);
+
+        if ($timeDiff < 60) {
+            $tweet->formattedTime = $timeDiff . 'm';
+        } elseif ($timeDiff < 1440) {
+            $tweet->formattedTime = floor($timeDiff / 60) . 'h';
+        } else {
+            $tweet->formattedTime = floor($timeDiff / 1440) . 'd';
+        }
+    }
+
+    // Return the tweets and user data as JSON response
+    return view('dashboard2', ['user' => $user, 'tweets' => $tweets]);
+}
+
+
 
 
 

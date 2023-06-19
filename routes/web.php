@@ -35,3 +35,4 @@ Route::delete('/tweets/{id}', [TweetController::class, 'deleteTweet'])->name('tw
 Route::post('/search', [RegisteredUserController::class, 'searchUsers'])->name('users.search');
 Route::get('/dashboard/profile', [TweetController::class, 'profileDisplay'])->name('profile.display');
 Route::get('/dashboard/main', function () {return view('components.tweet.subtweetcomp');});
+Route::get('/search/profile/{id}', [RegisteredUserController::class, 'displayUsers'])->name('search.profile');
