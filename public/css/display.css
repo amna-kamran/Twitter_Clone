@@ -59,7 +59,7 @@
     margin-left: 40px;
     margin-bottom: 12px;
     word-wrap: break-word;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 24px;
     font-weight: 300;
 }
@@ -135,14 +135,13 @@
 
 .TweetAuthor-name {
     margin-top: 5px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     line-height: 18px;
 }
 
 .TweetAuthor-screenName {
-    margin-left: 5px;
-    font-size: 13px;
+    font-size: 16px;
     line-height: 18px;
     font-weight: 300;
     color: #8899a6;

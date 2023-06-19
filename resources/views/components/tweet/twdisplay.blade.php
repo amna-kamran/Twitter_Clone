@@ -21,7 +21,9 @@
                             </span>
                             <span class="TweetAuthor-name">{{ $user->name }}</span>
                             <span class="Icon Icon--verified"></span>
-                            <span class="TweetAuthor-screenName">{{ $user->name }}</span>
+                            <span class="TweetAuthor-screenName">@ {{ $user->name }}</span>
+
+
                         </div>
                     </div>
                     <div class="timeline-Tweet-text">{{ $tweet->content }}</div>

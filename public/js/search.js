@@ -46,7 +46,7 @@ function searchUsers(searchQuery) {
                     // Add click event listener to each list item
                     listItem.addEventListener("click", function () {
                         // Call a function to display the user's profile and tweets
-                        displayUserProfile(user.id);
+                        console.log(user.id);
                     });
 
                     // Append the list item to the result list
@@ -58,6 +58,7 @@ function searchUsers(searchQuery) {
             } else {
                 // Handle case when no search results are found
                 searchResultsContainer.textContent = "No results found";
+                searchResultsContainer.classList.add("no-results");
             }
         })
         .catch((error) => {
@@ -65,7 +66,6 @@ function searchUsers(searchQuery) {
         });
 }
 
-// Function to handle the input event on the search bar
 // Function to handle the input event on the search bar
 function handleSearchInput() {
     const searchQuery = searchBar.value.trim();

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tweet;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Carbon\Carbon;
+
 
 class TweetController extends Controller
 {
@@ -28,40 +30,6 @@ class TweetController extends Controller
         // Pass the necessary data to the view
         return redirect()->route('tweets.show');
     }
-
-
-    // public function show()
-// {
-//     $user = auth()->user();
-
-    //     // Retrieve all the tweets, ordered by the most recent
-//     $tweets = Tweet::latest()->get();
-
-    //     // Format the time for each tweet
-//     $currentTime = now();
-//     foreach ($tweets as $tweet) {
-//         $tweetTime = $tweet->created_at;
-//         $timeDiff = $currentTime->diffInMinutes($tweetTime);
-
-    //         if ($timeDiff < 60) {
-//             $tweet->formattedTime = $timeDiff . 'm';
-//         } elseif ($timeDiff < 1440) {
-//             $tweet->formattedTime = floor($timeDiff / 60) . 'h';
-//         } else {
-//             $tweet->formattedTime = floor($timeDiff / 1440) . 'd';
-//         }
-//     }
-
-    //     if ($tweets->isEmpty()) {
-//         // Handle the case where no tweets are available
-//         $errorMessage = "No tweets found.";
-//         return response()->json(['errorMessage' => $errorMessage]);
-//     }
-
-    // Return the tweets as a JSON response
-//     return response()->json(['tweets' => $tweets, 'user' => $user]);
-// }
-
 
     function displayDashboard()
     {
@@ -108,6 +76,36 @@ class TweetController extends Controller
         // Return a success response
         return response()->json(['success' => true, 'message' => 'Tweet deleted successfully.']);
     }
+
+
+public function profileDisplay()
+{
+    $user = auth()->user();
+
+    // Retrieve the tweets with matching user_id
+    $tweets = Tweet::where('u_id', $user->id)->latest()->get();
+
+    // Format the time for each tweet
+    $currentTime = now();
+    foreach ($tweets as $tweet) {
+        $tweetTime = $tweet->created_at;
+        $timeDiff = $currentTime->diffInMinutes($tweetTime);
+
+        if ($timeDiff < 60) {
+            $tweet->formattedTime = $timeDiff . 'm';
+        } elseif ($timeDiff < 1440) {
+            $tweet->formattedTime = floor($timeDiff / 60) . 'h';
+        } else {
+            $tweet->formattedTime = floor($timeDiff / 1440) . 'd';
+        }
+    }
+
+    // Return the tweets and user data as JSON response
+   return view('dashboard2', ['user' => $user, 'tweets' => $tweets]);
+
+}
+
+
 
 
 }

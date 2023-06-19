@@ -80,15 +80,6 @@ function tweetReq() {
                 console.error("Error:", data.errorMessage);
                 return;
             }
-
-            // Update the view with the received tweets
-            const tweetsContainer = document.querySelector("#tweets-container");
-            const tweetView = `
-        @include('components.tweet.twdisplay', ['tweets' => ${JSON.stringify(
-            tweets
-        )}, 'user' => ${JSON.stringify(user)}])
-      `;
-            // Update the view here...
         });
 }
 
