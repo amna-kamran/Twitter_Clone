@@ -17,7 +17,7 @@
       <ul>
         <li class="active">
           <span>Tweets</span>
-          <strong>345</strong>
+          <strong></strong>
         </li>
         
         <li>
@@ -63,7 +63,12 @@
       </section>
     </div>
   </div>
-
+  <script>
+    // Get the actual number of tweets and update the count dynamically
+    const tweetCount = {{ $tweets->count() }};
+    const tweetCountElement = document.querySelector('.bar .container ul li:first-child strong');
+    tweetCountElement.textContent = tweetCount;
+  </script>
 
 </body>
 
