@@ -142,10 +142,12 @@ function showFollowings() {
 activeContainer();
   // Send AJAX request to display following users
   fetch('/get-followings', {
-    method: 'GET',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+       'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     },
+  body: JSON.stringify({ user_id: profileUserId })
   })
     .then(response => response.json())
     .then(data => {
