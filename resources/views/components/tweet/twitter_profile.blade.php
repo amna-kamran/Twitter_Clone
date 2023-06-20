@@ -20,12 +20,12 @@
           <strong></strong>
         </li>
         
-        <li>
+        <li id="followings_container" onclick = showFollowings>
           <span>Followings</span>
           <strong id="followings"></strong>
         </li>
         
-        <li>
+        <li id="followers_container">
           <span>Followers</span>
           <strong>34</strong>
         </li>
@@ -122,6 +122,47 @@ fetch('/get-followings-count', {
   });
 }
 sendRequestForCount();
+
+//displaying the user the logged in user is following
+function activeContainer(){
+    // Make the current container active
+   const container = event.currentTarget;
+  container.classList.add('active');
+  
+  // Remove active class from the rest of the containers
+  const containers = document.querySelectorAll('li');
+  containers.forEach(containerItem => {
+    if (containerItem !== container) {
+      containerItem.classList.remove('active');
+    }
+  });
+
+}
+function showFollowings() {
+activeContainer();
+  // Send AJAX request to display following users
+  fetch('/get-followings', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.followings);
+    })
+    .catch(error => {
+      // Handle errors
+      console.error('Error:', error);
+    });
+}
+
+// Attach click event listener to the "Followings" element
+const followingsContainer = document.getElementById('followings_container');
+followingsContainer.addEventListener('click', showFollowings);
+const followersContainer = document.getElementById('followers_container');
+followersContainer.addEventListener('click', activeContainer);
+
 
   </script>
 

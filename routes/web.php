@@ -39,3 +39,4 @@ Route::get('/dashboard/main', function () {return view('components.tweet.subtwee
 Route::get('/search/profile/{id}', [RegisteredUserController::class, 'displayUsers'])->name('search.profile');
 Route::post('/followings', [FollowingsController::class, 'storeFollowings']);
 Route::post('/get-followings-count', [FollowingsController::class, 'getFollowingsCount']);
+Route::get('/get-followings', [FollowingsController::class, 'getFollowings']);

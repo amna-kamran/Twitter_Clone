@@ -49,4 +49,14 @@ public function storeFollowings(Request $request)
         return response()->json(['followings_count' => $followingsCount]);
     }
 
+    public function getFollowings()
+    {
+        // Fetch the following users
+        $user = auth()->user();
+        $followings = Following::where('user_id', $user->id)->get();
+        
+        // Return the following users as JSON response
+        return response()->json(['followings' => $followings]);
+    }
+
 }
