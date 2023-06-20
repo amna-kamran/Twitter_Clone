@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TweetController;
+use App\Http\Controllers\FollowingsController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
@@ -36,3 +37,5 @@ Route::post('/search', [RegisteredUserController::class, 'searchUsers'])->name('
 Route::get('/dashboard/profile', [TweetController::class, 'profileDisplay'])->name('profile.display');
 Route::get('/dashboard/main', function () {return view('components.tweet.subtweetcomp');});
 Route::get('/search/profile/{id}', [RegisteredUserController::class, 'displayUsers'])->name('search.profile');
+Route::post('/followings', [FollowingsController::class, 'storeFollowings']);
+Route::post('/get-followings-count', [FollowingsController::class, 'getFollowingsCount']);
