@@ -66,12 +66,17 @@
     // Get the actual number of tweets and update the count dynamically
     const tweetCount = {{ $tweets->count() }};
     const tweetCountElement = document.querySelector('.bar .container ul li:first-child strong');
-    tweetCountElement.textContent = tweetCount;
+    const followButton = document.querySelector('.follow');
+    const profileUserId = followButton.dataset.userId;
+    const followingsElement = document.getElementById('followings');
+    const containers = document.querySelectorAll('li');
+    const followingsContainer = document.getElementById('followings_container');
+    const followersContainer = document.getElementById('followers_container');
+    const tweetButton = document.getElementById('tweetButton');
+    const tweets = document.querySelector('.tweets');
+    const replacementDiv = document.getElementById('replacementDiv');
 
-    //code to follow a user on clicking the following button
-const followButton = document.querySelector('.follow');
-  // Get the user ID of the profile being visited (replace with your actual code)
-  const profileUserId = followButton.dataset.userId;
+    tweetCountElement.textContent = tweetCount;
 // Add click event listener to the follow button
 followButton.addEventListener('click', function() {
   console.log("clicked");
@@ -109,7 +114,7 @@ fetch('/get-followings-count', {
     console.log("Followings count:", data.followings_count);
     // Update the following element with the returned count
     const followingsCount = data.followings_count;
-    const followingsElement = document.getElementById('followings');
+
    
     if (followingsElement) {
       followingsElement.innerHTML = followingsCount.toString();
@@ -129,7 +134,6 @@ function activeContainer(){
   container.classList.add('active');
   
   // Remove active class from the rest of the containers
-  const containers = document.querySelectorAll('li');
   containers.forEach(containerItem => {
     if (containerItem !== container) {
       containerItem.classList.remove('active');
@@ -159,32 +163,14 @@ activeContainer();
 }
 
 // Attach click event listener to the "Followings" element
-const followingsContainer = document.getElementById('followings_container');
-followingsContainer.addEventListener('click', showFollowings);
-const followersContainer = document.getElementById('followers_container');
-followersContainer.addEventListener('click', activeContainer);
-const tweetButton = document.getElementById('tweetButton');
-tweetButton.addEventListener('click', activeContainer);
 
-  </script>
+followingsContainer.addEventListener('click', showFollowings);
+followersContainer.addEventListener('click', activeContainer);
+tweetButton.addEventListener('click', activeContainer);
+</script>
   <script>
   document.addEventListener('DOMContentLoaded', function() {
   // Hide the ul with class "tweets" and show the replacement div initially
-  var tweets = document.querySelector('.tweets');
-  var replacementDiv = document.getElementById('replacementDiv');
-  tweets.style.display = 'none';
-  replacementDiv.style.display = 'block';
-
-  // Function to toggle the visibility of the ul and replacement div
-  function toggleTweets() {
-    if (tweets.style.display === 'none') {
-      tweets.style.display = 'block';
-      replacementDiv.style.display = 'none';
-    } else {
-      tweets.style.display = 'none';
-      replacementDiv.style.display = 'block';
-    }
-  }
 
   // Function to perform some action on container click
   function activeContainer() {
@@ -193,12 +179,17 @@ tweetButton.addEventListener('click', activeContainer);
   }
 
   // On clicking the "Tweet" button, call the toggleTweets function and activeContainer function
-  var tweetButton = document.getElementById('tweetButton');
   tweetButton.addEventListener('click', function(e) {
     activeContainer();
-    e.preventDefault();
     console.log("Tweet button clicked");
-    toggleTweets();
+          tweets.style.display = 'block';
+      replacementDiv.style.display = 'none';
+  });
+    followingsContainer.addEventListener('click', function(e) {
+    activeContainer();
+    console.log("Tweet button clicked");
+          tweets.style.display = 'none';
+      replacementDiv.style.display = 'block';
   });
 });
 
