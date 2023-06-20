@@ -15,7 +15,7 @@
   <div class="bar">
     <div class="container">
       <ul>
-        <li class="active">
+        <li class="active" id="tweetButton">
           <span>Tweets</span>
           <strong></strong>
         </li>
@@ -55,10 +55,9 @@
         <nav>
           <a href="" class="active">Tweets</a>
         </nav>
-
+        <div id="replacementDiv" style="display: none;">Hi</div>
         <ul class="tweets">
           @include('components.tweet.profile_tweet_display', ['tweets' => $tweets, 'user' => $user])
-
         </ul>
       </section>
     </div>
@@ -164,9 +163,46 @@ const followingsContainer = document.getElementById('followings_container');
 followingsContainer.addEventListener('click', showFollowings);
 const followersContainer = document.getElementById('followers_container');
 followersContainer.addEventListener('click', activeContainer);
-
+const tweetButton = document.getElementById('tweetButton');
+tweetButton.addEventListener('click', activeContainer);
 
   </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+  // Hide the ul with class "tweets" and show the replacement div initially
+  var tweets = document.querySelector('.tweets');
+  var replacementDiv = document.getElementById('replacementDiv');
+  tweets.style.display = 'none';
+  replacementDiv.style.display = 'block';
+
+  // Function to toggle the visibility of the ul and replacement div
+  function toggleTweets() {
+    if (tweets.style.display === 'none') {
+      tweets.style.display = 'block';
+      replacementDiv.style.display = 'none';
+    } else {
+      tweets.style.display = 'none';
+      replacementDiv.style.display = 'block';
+    }
+  }
+
+  // Function to perform some action on container click
+  function activeContainer() {
+    // Add your code to make the container active
+    console.log("Container clicked");
+  }
+
+  // On clicking the "Tweet" button, call the toggleTweets function and activeContainer function
+  var tweetButton = document.getElementById('tweetButton');
+  tweetButton.addEventListener('click', function(e) {
+    activeContainer();
+    e.preventDefault();
+    console.log("Tweet button clicked");
+    toggleTweets();
+  });
+});
+
+    </script>
 
 </body>
 
