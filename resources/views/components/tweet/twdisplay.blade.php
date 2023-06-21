@@ -22,6 +22,7 @@
                             <span class="TweetAuthor-name">{{ $user->name }}</span>
                             <span class="Icon Icon--verified"></span>
                             <span class="TweetAuthor-screenName">@ {{ $user->name }}</span>
+                            <span><button type="submit" class="delete-tweet-button" data-tweet-id="{{ $tweet->id }}">Delete</button></span>
 
 
                         </div>
@@ -35,7 +36,7 @@
                         <li class="timeline-Tweet-action"><a class="Icon Icon--share" href="#"></a></li>
                     </ul>
                      <li class="timeline-Tweet-action">
-                                <button type="submit" class="delete-tweet-button" data-tweet-id="{{ $tweet->id }}">...</button>
+                                
                         </li>
                 </div>
             </div>

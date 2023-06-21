@@ -56,7 +56,7 @@ public function getFollowings(Request $request)
     
     // Retrieve the following users' IDs
     $followings = Following::where('user_id', $userId)->get();
-    $followingIds = $followings->pluck('following_user_id');
+    $followingIds = $followings->pluck('following_id');
 
     // Retrieve the user data for the following user IDs
     $users = User::whereIn('id', $followingIds)->get();

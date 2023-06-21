@@ -53,10 +53,9 @@
 
       <section class="timeline">
         <nav>
-          <a href="" class="active">Tweets</a>
+          <a href="" class="active" id="header">Tweets</a>
         </nav>
-        <div id="following-user" style="display: none;">Hi</div>
-        <div id="replacementDiv" style="display: none;">Hi</div>
+        <div id="following-users" style="display: none;"></div>
         <ul class="tweets">
           @include('components.tweet.profile_tweet_display', ['tweets' => $tweets, 'user' => $user])
         </ul>
@@ -72,10 +71,12 @@
     const followingsElement = document.getElementById('followings');
     const containers = document.querySelectorAll('li');
     const followingsContainer = document.getElementById('followings_container');
+    const header = document.getElementById('header');
     const followersContainer = document.getElementById('followers_container');
     const tweetButton = document.getElementById('tweetButton');
     const tweets = document.querySelector('.tweets');
     const replacementDiv = document.getElementById('replacementDiv');
+    const followingUsersDiv = document.getElementById('following-users');
 
     tweetCountElement.textContent = tweetCount;
 // Add click event listener to the follow button
@@ -143,30 +144,53 @@ function activeContainer(){
 
 }
 function showFollowings() {
-activeContainer();
+  activeContainer();
+
   // Send AJAX request to display following users
   fetch('/get-followings', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-       'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     },
-  body: JSON.stringify({ user_id: profileUserId })
+    body: JSON.stringify({ user_id: profileUserId })
   })
     .then(response => response.json())
     .then(data => {
-  const followingUsersDiv = document.getElementById('following-users');
+      console.log(data)
+      followingUsersDiv.innerHTML="";
+      // Iterate over the followings array
+      data.followings.forEach(following => {
+        // Retrieve the corresponding user from the users array
+       const user = data.users.find(u => u.id === following.following_id);
+        // Create the HTML structure for each following user
+        const followingUserHtml = `
+          <div class="tweet-wrap">
+            <div class="tweet-header">
+              <div class="tweet-header-info">
+                ${user.name}<span>${user.name}
+              </div>
+            </div>
+          </div>
+        `;
 
-  // Clear any existing content
-  // followingUsersDiv.innerHTML = '';
-  console.log(data.followings)
-  // Iterate over the following user array and create HTML elements);
-})
-.catch(error => {
-  // Handle errors
-  console.error('Error:', error);
-});
+        // Create a new div element for the following user
+        const followingUserDiv = document.createElement('div');
+        followingUserDiv.innerHTML = followingUserHtml;
+        console.log(followingUserDiv)
+
+        // Append the div to the "following-users" div
+        followingUsersDiv.appendChild(followingUserDiv);
+      });
+    })
+    .catch(error => {
+      // Handle errors
+      console.error('Error:', error);
+    });
 }
+
+
+
 
 // Attach click event listener to the "Followings" element
 
@@ -189,13 +213,15 @@ tweetButton.addEventListener('click', activeContainer);
     activeContainer();
     console.log("Tweet button clicked");
           tweets.style.display = 'block';
-      replacementDiv.style.display = 'none';
+      followingUsersDiv.style.display = 'none';
+      header.innerHTML = "Tweets";
   });
     followingsContainer.addEventListener('click', function(e) {
     activeContainer();
     console.log("Tweet button clicked");
           tweets.style.display = 'none';
-      replacementDiv.style.display = 'block';
+      followingUsersDiv.style.display = 'block';
+      header.innerHTML = "Followings";
   });
 });
 

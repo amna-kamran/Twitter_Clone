@@ -147,3 +147,17 @@
     color: #8899a6;
 }
 /* --main */
+.delete-tweet-button {
+    background-color: transparent;
+    border: none;
+    color: rgb(196, 196, 196);
+    cursor: pointer;
+    transition: color 0.3s;
+    font-size: 12px;
+    padding-left: 450px;
+    font-weight: bold;
+}
+
+.delete-tweet-button:hover {
+    color: #3bb9e3;
+}
