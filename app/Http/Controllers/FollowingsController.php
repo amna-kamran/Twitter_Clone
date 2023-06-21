@@ -49,14 +49,27 @@ public function storeFollowings(Request $request)
         return response()->json(['followings_count' => $followingsCount]);
     }
 
-    public function getFollowings(Request $request)
-    {
-        // Retrieve the user ID from the request body
-        $userId = $request->input('user_id');
-        $followings = Following::where('user_id', $userId)->get();
-        
-        // Return the following users as JSON response
-        return response()->json(['followings' => $followings]);
-    }
+public function getFollowings(Request $request)
+{
+    // Retrieve the user ID from the request body
+    $userId = $request->input('user_id');
+    
+    // Retrieve the following users' IDs
+    $followings = Following::where('user_id', $userId)->get();
+    $followingIds = $followings->pluck('following_user_id');
+
+    // Retrieve the user data for the following user IDs
+    $users = User::whereIn('id', $followingIds)->get();
+
+    // Prepare the result array with followings and corresponding users
+    $result = [
+        'followings' => $followings,
+        'users' => $users,
+    ];
+
+    // Return the result array as JSON response
+    return response()->json($result);
+}
+
 
 }

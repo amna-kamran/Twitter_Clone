@@ -55,6 +55,7 @@
         <nav>
           <a href="" class="active">Tweets</a>
         </nav>
+        <div id="following-user" style="display: none;">Hi</div>
         <div id="replacementDiv" style="display: none;">Hi</div>
         <ul class="tweets">
           @include('components.tweet.profile_tweet_display', ['tweets' => $tweets, 'user' => $user])
@@ -154,12 +155,17 @@ activeContainer();
   })
     .then(response => response.json())
     .then(data => {
-      console.log(data.followings);
-    })
-    .catch(error => {
-      // Handle errors
-      console.error('Error:', error);
-    });
+  const followingUsersDiv = document.getElementById('following-users');
+
+  // Clear any existing content
+  // followingUsersDiv.innerHTML = '';
+  console.log(data.followings)
+  // Iterate over the following user array and create HTML elements);
+})
+.catch(error => {
+  // Handle errors
+  console.error('Error:', error);
+});
 }
 
 // Attach click event listener to the "Followings" element
